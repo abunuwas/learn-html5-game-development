@@ -20,41 +20,41 @@ SpriteSheetClass = Class.extend({
     //
     // The Image object that we created for our
     // atlas.
-	img: null,
+    img: null,
 
     // The URL path that we grabbed our atlas
     // from.
-	url: "",
+    url: "",
 
     // An array of all the sprites in our atlas.
-	sprites: new Array(),
+    sprites: new Array(),
 
-	//-----------------------------------------
-	init: function () {},
+    //-----------------------------------------
+    init: function () {},
 
-	//-----------------------------------------
+    //-----------------------------------------
     // Load the atlas at the path 'imgName' into
     // memory. This is similar to how we've
     // loaded images in previous units.
-	load: function (imgName) {
-		// Store the URL of the spritesheet we want.
+    load: function (imgName) {
+        // Store the URL of the spritesheet we want.
         this.url = imgName;
         
         // Create a new image whose source is at 'imgName'.
-		var img = new Image();
-		img.src = imgName;
+        var img = new Image();
+        img.src = imgName;
 
         // Store the Image object in the img parameter.
-		this.img = img;
+        this.img = img;
 
         // Store this SpriteSheetClass in our global
         // dictionary gSpriteSheets defined above.
-		gSpriteSheets[imgName] = this;
-	},
+        gSpriteSheets[imgName] = this;
+    },
 
-	//-----------------------------------------
-	// Define a sprite for this atlas
-	defSprite: function (name, x, y, w, h, cx, cy) {
+    //-----------------------------------------
+    // Define a sprite for this atlas
+    defSprite: function (name, x, y, w, h, cx, cy) {
         // We create a new object with:
         //
         // The name of the sprite as a string
@@ -70,33 +70,32 @@ SpriteSheetClass = Class.extend({
         // so we don't have to do the calculations
         // each time we need this. This might seem
         // minimal, but it adds up!
-		var spt = {
-			"id": name,
-			"x": x,
-			"y": y,
-			"w": w,
-			"h": h,
-			"cx": cx == null ? 0 : cx,
-			"cy": cy == null ? 0 : cy
-		};
+        var spt = {
+            "id": name,
+            "x": x,
+            "y": y,
+            "w": w,
+            "h": h,
+            "cx": cx === null ? 0 : cx,
+            "cy": cy === null ? 0 : cy
+        };
 
         // We push this new object into
         // our array of sprite objects,
         // at the end of the array.
-		this.sprites.push(spt);
-	},
+        this.sprites.push(spt);
+    },
 
-	//-----------------------------------------
+    //-----------------------------------------
     // Parse the JSON file passed in as 'atlasJSON'
     // that is associated to this atlas.
-	parseAtlasDefinition: function (atlasJSON) {
+    parseAtlasDefinition: function (atlasJSON) {
         // Parse the input 'atlasJSON' using the
         // JSON.parse method and store it in a
         // variable.
         //
-		// YOUR CODE HERE
-        
-        var atlas = JSON.parse(atlasJSON);
+        // YOUR CODE HERE
+        var frames = JSON.parse(atlasJSON);
 
 
         // For each sprite in the parsed JSON,
@@ -118,17 +117,16 @@ SpriteSheetClass = Class.extend({
         //    'SpriteSheetClass'.
         //
         // YOUR CODE HERE
-        
-        for (url in atlas){
-            var url = atlas[url];
-            var x = url.frame.x;
-            var y = url.frame.y;
-            var name = url; 
-            var w = url.frame.w; 
-            var h = url.frame.h; 
-            var cx = -w/2;
-            var cy =  -h/2; 
-            defSprite(name, x, y, w, h, cx, cy);        
-	};
 
-}});
+        for(var index; index<frames.length; index++) {
+            var frame = frames[index];
+            var name = sprite.name;
+            var x = sprite.x;
+            var y = sprite.y;
+
+        };
+
+        
+    }
+
+});
